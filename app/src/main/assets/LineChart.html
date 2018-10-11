@@ -1,0 +1,70 @@
+﻿<html>
+<head>
+    <meta charset="UTF-8"/>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="highcharts.js"></script>
+</head>
+<body>
+<div id="container" style="width: 100%; height: 100%"></div>
+<script language="JavaScript">
+
+$(document).ready(function() {
+   var title = {
+      text: '近七日维护数量'
+   };
+
+   var xAxis = {
+      categories: JSON.parse(LineChart.categories())
+   };
+
+   var yAxis = {
+      title: {
+         text: ''
+      },
+      plotLines: [{
+         value: 0,
+         width: 1,
+         color: '#808080'
+      }]
+   };
+
+   var plotOptions = {
+      line: {
+         dataLabels: {
+            enabled: true
+         },
+         enableMouseTracking: true
+      }
+   };
+
+   var legend = {
+      enabled: false
+   };
+
+   var credits = {
+       enabled: false
+   };
+
+   var series =  [
+      {
+         name: '维护数量',
+         data: JSON.parse(LineChart.data())
+      }
+   ];
+
+   var json = {};
+   json.title = title;
+   json.xAxis = xAxis;
+   json.yAxis = yAxis;
+   json.legend = legend;
+   json.plotOptions = plotOptions;
+   json.credits = credits;
+   json.series = series;
+
+   $('#container').highcharts(json);
+});
+
+
+</script>
+</body>
+</html>
