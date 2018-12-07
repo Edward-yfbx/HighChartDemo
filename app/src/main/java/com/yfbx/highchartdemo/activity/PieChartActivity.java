@@ -1,15 +1,13 @@
 package com.yfbx.highchartdemo.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.webkit.WebView;
 
 import com.yfbx.highchartdemo.R;
-import com.yfbx.highchartdemo.bean.KeyValue;
+import com.yfbx.highchartdemo.js.BrowserChart;
 import com.yfbx.highchartdemo.js.PieChart;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Author:Edward
@@ -17,7 +15,7 @@ import java.util.List;
  * Description:
  */
 
-public class PieChartActivity extends ChartWebViewActivity {
+public class PieChartActivity extends Activity {
 
 
     @Override
@@ -27,25 +25,8 @@ public class PieChartActivity extends ChartWebViewActivity {
         WebView browserChart = findViewById(R.id.browser_chart);
         WebView pieChart = findViewById(R.id.pie_chart);
 
-        initChart(browserChart, "BrowserChart.html");
-        initChart(pieChart, "PieChart.html");
+        PieChart.load(pieChart);
+        BrowserChart.load(browserChart);
 
-        //得到数据后调用
-        PieChart.setData(pieChart, getTestData());
-    }
-
-
-    /**
-     * 测试数据
-     */
-    private List<KeyValue> getTestData() {
-        List<KeyValue> data = new ArrayList<>();
-        data.add(new KeyValue("Firefox", 45.0f));
-        data.add(new KeyValue("IE", 26.8f));
-        data.add(new KeyValue("Chrome", 12.8f));
-        data.add(new KeyValue("Safari", 8.5f));
-        data.add(new KeyValue("Opera", 6.2f));
-        data.add(new KeyValue("Others", 0.7f));
-        return data;
     }
 }

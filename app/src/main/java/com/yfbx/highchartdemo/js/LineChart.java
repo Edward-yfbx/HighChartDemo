@@ -3,10 +3,7 @@ package com.yfbx.highchartdemo.js;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
-import com.google.gson.JsonArray;
-import com.yfbx.highchartdemo.bean.KeyValue;
-
-import java.util.List;
+import com.google.gson.Gson;
 
 /**
  * Author:Edward
@@ -14,30 +11,44 @@ import java.util.List;
  * Description:
  */
 
-public class LineChart {
+public class LineChart extends BaseChart {
 
-    private JsonArray categories = new JsonArray();
-    private JsonArray values = new JsonArray();
+    private String categories;
+    private String values;
 
-    public static void setData(WebView chart, List<KeyValue> data) {
-        chart.addJavascriptInterface(new LineChart(data), "LineChart");
+
+    public LineChart(WebView webView) {
+        super(webView);
     }
 
-    private LineChart(List<KeyValue> data) {
-        for (KeyValue datum : data) {
-            categories.add(datum.key);
-            values.add(datum.value);
-        }
+    @Override
+    String loadChartHtml() {
+        return "LineChart.html";
+    }
+
+    @Override
+    Object attachJsInterface() {
+        return this;
+    }
+
+    public void loadData() {
+        String[] array = {"09/10", "09/11", "09/12", "09/13", "09/14", "09/15", "09/16"};
+        categories = new Gson().toJsonTree(array).toString();
+
+        Integer[] value = {14, 16, 21, 21, 19, 16, 14};
+        values = new Gson().toJsonTree(value).toString();
     }
 
     @JavascriptInterface
     public String categories() {
-        return categories.toString();
+        return categories;
     }
 
-    
+
     @JavascriptInterface
     public String data() {
-        return values.toString();
+        return values;
     }
+
+
 }

@@ -1,10 +1,12 @@
 package com.yfbx.highchartdemo.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.webkit.WebView;
 
 import com.yfbx.highchartdemo.R;
+import com.yfbx.highchartdemo.js.ColumnChart;
 
 /**
  * Author:Edward
@@ -12,7 +14,7 @@ import com.yfbx.highchartdemo.R;
  * Description:
  */
 
-public class ColumnChartActivity extends ChartWebViewActivity {
+public class ColumnChartActivity extends Activity {
 
 
     @Override
@@ -21,6 +23,6 @@ public class ColumnChartActivity extends ChartWebViewActivity {
         setContentView(R.layout.activity_column_chart);
         WebView columnChart = findViewById(R.id.column_chart);
 
-        initChart(columnChart, "ColumnChart.html");
+        ColumnChart.load(columnChart);
     }
 }

@@ -1,6 +1,7 @@
 package com.yfbx.highchartdemo.js;
 
 import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -11,7 +12,22 @@ import com.google.gson.JsonObject;
  * Description:
  */
 
-public class TestChart {
+public class TestChart extends BaseChart {
+
+
+    public TestChart(WebView webView) {
+        super(webView);
+    }
+
+    @Override
+    String loadChartHtml() {
+        return "TestChart.html";
+    }
+
+    @Override
+    Object attachJsInterface() {
+        return this;
+    }
 
     @JavascriptInterface
     public String title() {
@@ -76,5 +92,6 @@ public class TestChart {
         return series.toString();
 
     }
+
 
 }
